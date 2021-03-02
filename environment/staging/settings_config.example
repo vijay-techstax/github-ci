@@ -1,0 +1,3 @@
+environment = {
+    "environ": "staging",
+}

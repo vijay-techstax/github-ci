@@ -1,0 +1,7 @@
+.git
+.vscode
+__pycache__
+build/
+old/
+.env
+settings_config.py

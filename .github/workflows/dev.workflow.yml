@@ -38,4 +38,4 @@ jobs:
     steps:
     - name: Deploys the App
       run: |
-        systemctl start github-ci
+        sudo systemctl start github-ci

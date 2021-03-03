@@ -4,9 +4,27 @@ on:
     branches:
       - dev
 jobs:
-  build-and-test:
+  pull:
+    strategy:
+      matrix:
+        os: [self-hosted]
+    
+    runs-on: {{ matrix.os }}
 
-    runs-on: self-hosted
+    steps:
+      - name: Pulls from remote dev
+        run: |
+          git pull origin dev
+  
+  build-and-test:
+    needs:
+      - pull
+    
+    strategy:
+      matrix:
+        os: [self-hosted]
+
+    runs-on: {{ matrix.os }}
 
     steps:
     - uses: actions/checkout@v2
@@ -22,8 +40,12 @@ jobs:
   deploy:
     needs:
       - build-and-test
+
+    strategy:
+      matrix:
+        os: [self-hosted]
     
-    runs-on: self.hosted
+    runs-on: {{ matrix.os }}
 
     steps:
     - name: Deploys the App

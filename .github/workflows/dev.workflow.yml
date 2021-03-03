@@ -4,12 +4,8 @@ on:
     branches:
       - dev
 jobs:
-  pull:
-    strategy:
-      matrix:
-        os: [self-hosted]
-    
-    runs-on: {{ matrix.os }}
+  pull:    
+    runs-on: self-hosted
 
     steps:
       - name: Pulls from remote dev
@@ -19,12 +15,8 @@ jobs:
   build-and-test:
     needs:
       - pull
-    
-    strategy:
-      matrix:
-        os: [self-hosted]
 
-    runs-on: {{ matrix.os }}
+    runs-on: self-hosted
 
     steps:
     - uses: actions/checkout@v2
@@ -40,14 +32,10 @@ jobs:
   deploy:
     needs:
       - build-and-test
-
-    strategy:
-      matrix:
-        os: [self-hosted]
     
-    runs-on: {{ matrix.os }}
+    runs-on: self-hosted
 
     steps:
     - name: Deploys the App
       run: |
-        python app.py
+        systemctl start github-ci

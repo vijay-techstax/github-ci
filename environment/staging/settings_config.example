@@ -1,5 +1,0 @@
-environment = {
-    "environ": "staging",
-}
-
-PORT = 8000

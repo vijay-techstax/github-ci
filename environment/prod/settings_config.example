@@ -1,5 +1,0 @@
-environment = {
-    "environ": "prod",
-}
-
-PORT = 8000

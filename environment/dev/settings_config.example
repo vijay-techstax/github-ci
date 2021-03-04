@@ -1,5 +1,0 @@
-environment = {
-    "environ": "dev",
-}
-
-PORT = 8000

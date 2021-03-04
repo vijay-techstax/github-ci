@@ -5,4 +5,3 @@ build/
 old/
 .env
 settings_config.py
-env/

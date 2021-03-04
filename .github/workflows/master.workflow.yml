@@ -1,11 +1,26 @@
-name: Master Workflow - Build and deploy to production
+name: Master Workflow - Builds and tests the master branch
 on:
   pull_request:
     types: closed
     branches:
       - master
 jobs:
+  pull:    
+    runs-on: self-hosted
+
+    steps:
+      - name: Sets environment
+        run: |
+          echo "$HOME/scripts" >> $GITHUB_PATH
+      
+      - uses: actions/checkout@v2
+      - name: Pulls from remote master
+        run: |
+          bash pull_repo.sh ${{ github.event.repository.name }} master
+  
   build-and-test:
+    needs:
+      - pull
 
     runs-on: self-hosted
 
@@ -19,14 +34,3 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-    
-  deploy:
-    needs:
-      - build-and-test
-    
-    runs-on: self.hosted
-
-    steps:
-    - name: Deploys the App
-      run: |
-        python app.py

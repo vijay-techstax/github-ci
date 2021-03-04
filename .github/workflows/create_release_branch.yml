@@ -24,11 +24,7 @@ jobs:
        git config user.email noreply@github.com
     
     - name: Update version number
-      run: printf "__title__ = 'techstax-communications'
-__description__ = 'The Techstax communications package'
-__version__ = '${{ github.event.inputs.versionName }}'
-__author__ = 'Techstax'
-__author_email__ = 'vijay@techstax.ml'\n" > __version__.py
+      run: printf "__title__ = 'techstax-communications'\n__description__ = 'The Techstax communications package'\n__version__ = '${{ github.event.inputs.versionName }}'\n__author__ = 'Techstax'\n__author_email__ = 'vijay@techstax.ml'\n" > __version__.py
     
     - name: Commit version
       id: make-commit

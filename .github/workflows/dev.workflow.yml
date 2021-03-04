@@ -8,10 +8,14 @@ jobs:
     runs-on: self-hosted
 
     steps:
+      - name: Sets environment
+        run: |
+          echo "$HOME/scripts" >> $GITHUB_PATH
+      
       - uses: actions/checkout@v2
       - name: Pulls from remote dev
         run: |
-          git pull origin dev
+          bash pull_repo.sh ${{ github.event.repository.name }} dev
   
   build-and-test:
     needs:

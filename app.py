@@ -16,7 +16,7 @@ async def read_root():
 
 @app.get("/endpoint")
 async def read_endpoint():
-    return {"endpoint": "endpoint"}
+    return {"updated": "endpoint"}
 
 
 if __name__ == "__main__":

@@ -19,5 +19,10 @@ async def read_endpoint():
     return {"message": "endpoint"}
 
 
+@app.get("/sample")
+async def read_sample():
+    return {"message": "sample"}
+
+
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=PORT)

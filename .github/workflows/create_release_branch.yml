@@ -12,35 +12,35 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    – name: Check out code
+    - name: Check out code
     - uses: actions/checkout@v2
     
-    – name: Create release branch
+    - name: Create release branch
       run: git checkout -b release/v${{ github.event.inputs.versionName }}
     
-    – name: Initialize mandatory git config
+    - name: Initialize mandatory git config
       run: |
        git config user.name "GitHub Actions"
        git config user.email noreply@github.com
     
-    – name: Update version number
+    - name: Update version number
       run: printf "__title__ = 'techstax-communications'
 __description__ = 'The Techstax communications package'
 __version__ = '${{ github.event.inputs.versionName }}'
 __author__ = 'Techstax'
 __author_email__ = 'vijay@techstax.ml'\n" > __version__.py
     
-    – name: Commit version
+    - name: Commit version
       id: make-commit
       run: |
         git add __version__.py
         git commit –message "Prepare release ${{ github.event.inputs.versionName }}"
         echo "::set-output name=commit::$(git rev-parse HEAD)"
     
-    – name: Push new branch
+    - name: Push new branch
       run: git push origin release/v${{ github.event.inputs.versionName }}
     
-    – name: Create pull request into master
+    - name: Create pull request into master
       uses: thomaseizinger/create-pull-request@1.0.0
       with:
        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -53,7 +53,7 @@ __author_email__ = 'vijay@techstax.ml'\n" > __version__.py
            This PR was created in response workflow running.
            I've updated the version name and code commit: ${{ steps.make-commit.outputs.commit }}.
     
-    – name: Create pull request to dev
+    - name: Create pull request to dev
       uses: thomaseizinger/create-pull-request@1.0.0
       with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

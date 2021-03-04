@@ -43,4 +43,4 @@ jobs:
     steps:
     - name: Deploys the App
       run: |
-        sudo systemctl start github-ci
+        sudo systemctl restart github-ci
